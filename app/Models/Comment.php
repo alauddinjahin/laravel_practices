@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    use HasFactory;
+    public function photo()
+    {
+        return $this->belongsTo(Photo::class,'photo_id','id');
+    }
 }

@@ -36,11 +36,11 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         // for custom resoure route url naming 
-        Route::resourceVerbs([
-            'create' => 'c',
-            'edit' => 'e',
-        ]);
-        
+        // Route::resourceVerbs([
+        //     'create' => 'c',
+        //     'edit' => 'e',
+        // ]);
+
         
         $this->configureRateLimiting();
 

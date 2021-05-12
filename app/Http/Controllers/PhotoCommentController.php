@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Photo;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class PhotoCommentController extends Controller
      */
     public function index()
     {
-        //
+        dd('comment index');
     }
 
     /**
@@ -44,9 +45,13 @@ class PhotoCommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show(Photo $photo, Comment $comment)
     {
-        //
+        if($comment->photo_id != $photo->id){
+            abort(404);
+        }
+
+        dd($comment->load('photo'));
     }
 
     /**

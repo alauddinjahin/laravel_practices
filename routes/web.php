@@ -36,7 +36,8 @@ Route::resource('photos', 'PhotoController')
 ])
 ->parameters([
     'photos' => 'admin_photo'
-]);
+])
+;
 
 // nested route 
 // photos/1/comments/1
