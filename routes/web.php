@@ -1,8 +1,9 @@
 <?php
 
+use App\Models\Photo;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
-
 
 // Route::get('/git', function () {
 //     // return response()->streamDownload(function () {
@@ -41,7 +42,18 @@ Route::resource('photos', 'PhotoController')
 
 // nested route 
 // photos/1/comments/1
-Route::resource('photos.comments', 'PhotoCommentController');
+Route::resource('photos.comments', 'PhotoCommentController')
+;
+
+
+// this route dependancy injected from route service provider
+// Route::get('/posts/{post:slug}', function ($post) {
+//     dd($post,'dd');
+// });
+
+// ->scoped([
+//     'comment' => 'slug',
+// ]);
 
 // custom naming route 
 // Route::resource('photos', 'PhotoController')->names([
@@ -53,3 +65,16 @@ Route::get('/single-action', 'ProvisionServer');
 Route::get('/index', 'StorageModelController@index');
 
 Route::post('/file-upload', 'StorageModelController@onUpload')->name('upload_file');
+
+
+// this route will work if no route match
+
+// Route::fallback(function () {
+//     dd('no route match');
+// });
+
+
+Route::fallback(function () {
+    dd('no route match');
+})->middleware('throttle:userlimit');
+// this middleware use to check user limit from route service provider

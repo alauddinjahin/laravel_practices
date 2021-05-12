@@ -10,6 +10,7 @@
     </head>
     <body>
         <div class="container py-5">
+     
             <a href="{{ route('photos.build') }}" class="btn btn-info">create photo</a>
             <div class="row justify-content-center card">
                 <div class="card-body">

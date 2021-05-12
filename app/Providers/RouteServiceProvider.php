@@ -2,11 +2,14 @@
 
 namespace App\Providers;
 
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Photo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -41,6 +44,14 @@ class RouteServiceProvider extends ServiceProvider
         //     'edit' => 'e',
         // ]);
 
+        // set dependancy injection instead of controller method 
+        // Route::model('post', Photo::class); 
+
+        //
+        // Route::bind('user', function ($value) {
+        //     return User::where('name', $value)->firstOrFail();
+        // });
+
         
         $this->configureRateLimiting();
 
@@ -65,6 +76,10 @@ class RouteServiceProvider extends ServiceProvider
     {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+        });
+
+        RateLimiter::for('userlimit', function (Request $request) {
+            return Limit::perMinute(2);
         });
     }
 }

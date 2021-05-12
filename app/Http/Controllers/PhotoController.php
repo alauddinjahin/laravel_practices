@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class PhotoController extends Controller
 {
@@ -14,6 +15,11 @@ class PhotoController extends Controller
      */
     public function index()
     {
+
+        $route  = Route::current(); // Illuminate\Routing\Route
+        $name   = Route::currentRouteName(); // string
+        $action = Route::currentRouteAction(); // string
+        dd('no route match',$route,$name,$action);
         dd('photos index');
     }
 
@@ -44,9 +50,9 @@ class PhotoController extends Controller
      * @param  \App\Models\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function show(Photo $photo)
+    public function show(Photo $admin_photo)
     {
-        dd(request()->all(),$photo);
+        dd(request()->all(),$admin_photo);
     }
 
     /**

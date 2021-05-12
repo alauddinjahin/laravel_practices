@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Photo extends Model
 {
-    use HasFactory;
+    public function comments()
+    {
+        return $this->hasMany(Comment::class,'photo_id','id');
+    }
 }

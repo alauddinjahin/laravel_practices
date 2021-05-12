@@ -13,9 +13,9 @@ class PhotoCommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Photo $photo)
     {
-        dd('comment index');
+        dd($photo->comments);
     }
 
     /**
@@ -25,7 +25,7 @@ class PhotoCommentController extends Controller
      */
     public function create()
     {
-        //
+        dd('create ');
     }
 
     /**
@@ -60,9 +60,9 @@ class PhotoCommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit(Photo $photo, Comment $comment)
     {
-        //
+        dd($comment->load('photo'));
     }
 
     /**
